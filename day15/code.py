@@ -61,3 +61,24 @@ while turn < 30000000 - 1:
 
 with open('output2.txt','w') as fobj:
     fobj.write(str(current_num))
+
+
+# Try again:
+last_spoken = dict()
+for turn, num in enumerate(nums[:-1]):
+    last_spoken[num] = turn
+
+def next(current_num, last_spoken, turn):
+    next_num = turn - last_spoken.get(current_num, turn)
+    last_spoken[current_num] = turn
+    return next_num
+
+current_num = nums[-1]
+turn = len(nums) - 1
+
+while turn < 30000000 - 1:
+    current_num = next(current_num, last_spoken, turn)
+    turn += 1
+
+with open('output2.txt','w') as fobj:
+    fobj.write(str(current_num))
